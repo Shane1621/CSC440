@@ -1,0 +1,13 @@
+# Authors: Jarrod Carson, Ben Harman, Kane Hollingsworth, Shane Martin
+# CSC 440 - Project
+# Fall 2020
+
+from test import *
+
+def main():
+    print("Hello World!")
+
+    print(l)
+
+if __name__ == "__main__":
+    main()
