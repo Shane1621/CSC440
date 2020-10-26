@@ -28,7 +28,7 @@ def main():
     # Obtaining top-level directory to application source code
     while True:
         app_dir = input("Enter the path to the application directory\n" +
-                                        "NOTE: Enter ':q' to exit the program\n" + "> ").strip()
+                        "NOTE: Enter ':q' to exit the program\n" + "> ").strip()
 
         print()
 
@@ -98,17 +98,20 @@ def main():
         print("[-] Failed. Writing error to log\n")
         f.write("Penetration Testing Error\n----------\n" + e + "\n\n")
 
+    # ========================================= RESULTS ============================================
+
     results_dir = os.path.join(exec_dir,
                                f"Test_Results_{datetime.now().strftime('%m-%d-%Y_%H:%M:%S')}")
+
     os.makedirs(results_dir)
     print("=" * 50 + "\n" +
           " " * 11 + "Program Execution Complete\n" +
           "=" * 50 + "\n\n" +
           f"Storing results in '{results_dir}'\n")
 
-    # ========================================= RESULTS ============================================
-
     # TODO: Add way to store results from program
+
+    f.close()
           
     print("The program will exit in 5 seconds\n")
 
