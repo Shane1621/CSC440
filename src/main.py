@@ -17,6 +17,8 @@ from time import sleep
 
 # This will be the center of execution for the script
 def main():
+
+    os.system("clear")
     print("=" * 50 + "\n" +
           " " * 9 + "Automated Software Analysis Tool\n" +
           "=" * 50 + "\n")
@@ -28,7 +30,8 @@ def main():
     # Obtaining top-level directory to application source code
     while True:
         app_dir = input("Enter the path to the application directory\n" +
-                        "NOTE: Enter ':q' to exit the program\n" + "> ").strip()
+                        "NOTE: Enter ':q' to exit the program\n\n" + 
+                        "In: > ").strip()
 
         print()
 
@@ -37,8 +40,8 @@ def main():
         elif os.path.isdir(os.path.abspath(app_dir)):
             app_dir = os.path.abspath(app_dir)
             confirm = input(f"You have chosen the following path for the directory:\n{app_dir}\n" +
-                            "\nIs this the path you with to use? [Y / N]\n" +
-                            "NOTE: Enter ':q' to exit the program\n" + "> ")
+                            "\nIs this the path you with to use? [Y / N]\n\n" +
+                            "NOTE: Enter ':q' to exit the program\n" + "In: > ")
             
             if confirm[0].capitalize() == 'Y':
                 break
