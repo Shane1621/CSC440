@@ -8,17 +8,20 @@
 # The functions, variables, and other necessary components of each 
 # analysis script will be imported here.
 
-
+import os
+#pylint: disable=import-error
+from analysis.composition import analysis_comp
 
 # ==================================================================================================
-
-# Target application source file path
-target = None
 
 # This will be the center of execution for the script
 def main():
     # TODO: Implement GUI
-    pass
+
+    # Target application source file path
+    target = os.path.join(os.environ["HOME"], "Projects", "gnucash")
+
+    analysis_comp(target)
     
 if __name__ == "__main__":
     main()
