@@ -36,7 +36,7 @@ class GUI():
     # https://stackoverflow.com/questions/2261191/how-can-i-put-2-buttons-next-to-each-other
     # https://www.tutorialspoint.com/python/tk_frame.htm
     # https://realpython.com/python-gui-tkinter/
-
+    # https://tkdocs.com/tutorial/
     
     # This will be used to display the main menu when called
     def __init__(self):
