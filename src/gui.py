@@ -54,22 +54,22 @@ class GUI():
 
         # Button to start the autiting software
         auditing_button = tk.Button(master = button_frame, text = "Click here to start the security audit", command=self.start_audit())
-        auditing_button.pack(fill=tk.Y, side=tk.BOTTOM)
+        auditing_button.pack(side=tk.LEFT)
 
         # Button to close the window
         close_button = tk.Button(master = button_frame, text="Close", command=self.close_window(window))
-        close_button.pack(fill=tk.Y, side=tk.BOTTOM)
+        close_button.pack(side=tk.LEFT)
 
         # Label for displaying the text
         self.display_textbox = tk.Text(master = textbox_frame) 
-        self.display_textbox.pack(side=tk.BOTTOM, fill=tk.Y)
+        self.display_textbox.grid()
         
         # Test Display of Text
         self.display_text_to_label("Test text")
 
         # Packing frames
-        button_frame.grid(column=0, row=1)
-        textbox_frame.grid(column=1)
+        button_frame.grid(rowspan=2, row=1) 
+        textbox_frame.grid(row=0)
 
         # Starting the window mainloop
         window.mainloop()
