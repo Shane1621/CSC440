@@ -1,10 +1,10 @@
-# Authors: Jarrod Carson, Ben Harman, Kane Hollingsworth, Shane Martin
-# CSC 440 - Project
+# Authors: Jarrod Carson, Ben Harman, Kane Hollingsworth, Shane Martin # CSC 440 - Project
 # Fall 2020
 
 # --------------------------------------------------------------------------------------------------
 # Imports
 import tkinter as tk
+from tkinter import ttk
 
 # ==================================================================================================
 class GUI():
@@ -14,6 +14,10 @@ class GUI():
 
 # ==================================================================================================
     # Button Functions for Windows
+
+    # Function used to open other window that will be used for the script based attacks
+    def script_attack_window(self):
+        pass
 
     # Close Window Button Command
     def close_window(self, window):
@@ -25,7 +29,7 @@ class GUI():
         pass
 
     # Display Text To Textbox Command
-    def display_text_to_label(self, text):
+    def display_text_to_textbox(self, text):
         self.display_textbox.insert(tk.END, text)
         pass
 
@@ -42,47 +46,66 @@ class GUI():
     def __init__(self):
 
         # Initializing a new window
-        window = tk.Tk()
-        window.title("Main Menu")
+        root = tk.Tk()
+        root.title("Main Menu")
     
         # Making frames
-        button_frame = tk.Frame()
-        textbox_frame = tk.Frame()
+        canvas = tk.Frame()
+        blocked_space = tk.Frame(canvas)
 
         # Initializing the window settings
-        window.attributes('-type', 'dialog')
+        root.attributes('-type', 'dialog')
+#=======================Buttons=========================
 
         # Button to start the autiting software
-        auditing_button = tk.Button(master = button_frame, text = "Click here to start the security audit", command=self.start_audit())
-        auditing_button.pack(side=tk.LEFT)
+        auditing_button = tk.Button(master=canvas, text="Audit", command=self.start_audit())
 
         # Button to close the window
-        close_button = tk.Button(master = button_frame, text="Close", command=self.close_window(window))
-        close_button.pack(side=tk.LEFT)
+        close_button = tk.Button(master=canvas, text="Close", command=self.close_window(root))
 
-        # Label for displaying the text
-        self.display_textbox = tk.Text(master = textbox_frame) 
-        self.display_textbox.grid()
+        # Button to open script page
+        script_button = tk.Button(master=canvas, text="Script Attack", command=self.script_attack_window())
+
+        # Textbox for getting user input for file location
+        self.file_location_entry= tk.Entry(master=canvas)
+
+        # Button to set the file variable
+        file_enter_button = tk.Button(master=canvas, text="Enter File Path", command=self.set_variable())
+
+        # TextBox for displaying the text
+        self.display_textbox = tk.Text(master=canvas) 
         
         # Test Display of Text
-        self.display_text_to_label("Test text")
+        self.display_text_to_textbox("Test text")
 
-        # Packing frames
-        button_frame.grid(rowspan=2, row=1) 
-        textbox_frame.grid(row=0)
+        # Plotting the buttons on the grid
+        canvas.grid(column=0, row=0)
+
+        auditing_button.grid(row=3, column=1)
+        auditing_button.columnconfigure(1, weight=1)
+
+        close_button.grid(row=3, column=0)
+        close_button.columnconfigure(0, weight=1)
+
+        script_button.grid(row=3, column=2)
+        script_button.columnconfigure(2, weight=1)
+
+        self.file_location_entry.grid(column=0, row=1)
+        file_enter_button.grid(column=0, row=0)
+        self.display_textbox.grid(column=3, row=1)
+
 
         # Starting the window mainloop
-        window.mainloop()
+        root.mainloop()
     
 # ==================================================================================================
     # Other Window Functions
 
-    # Function used to open other window that will be used for the script based attacks
-    def script_attack_window():
-        pass
+    def set_variable(self):
+        self.file_location = self.file_location_entry.get()
 
     # Window for entering default location for auditing tool
-    def default_location_auditing_tool_window():
+    def default_location_auditing_tool_window(self):
         pass
 
 # ---------------------------------------------------------------------------------------------------
