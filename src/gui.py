@@ -42,6 +42,9 @@ class GUI(tk.Tk):
     def start_script_attack(self):
         pass
 
+    def start_options():
+        pass
+
     def std_out(self, text):
         self.textbox.insert(tk.END, str(text + '\n'))
 
@@ -54,6 +57,13 @@ class GUI(tk.Tk):
 
     def start_user_interface(self):
         
+        # test
+
+        # Initialize style
+        s = ttk.Style()
+        # Create style used by default for all Frames
+        s.configure('button_frame', background='green')
+
         # File location variable
         self.file_location = tk.StringVar()
 
@@ -70,6 +80,7 @@ class GUI(tk.Tk):
         buttons = [
                 ["Audit", self.start_audit],
                 ["Script", self.start_script_attack],
+                ["Options", self.start_options],
                 ["Clear", self.clear_stdout],
                 ["Close", self.on_close]
                 ]
@@ -103,8 +114,6 @@ class GUI(tk.Tk):
         self.button_frame.grid(column = 0, row=0, sticky="n", rowspan=2)
 
 # ==================================================================================================
-
-# ---------------------------------------------------------------------------------------------------
 
 x = GUI()
 x.mainloop()
