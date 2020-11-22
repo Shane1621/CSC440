@@ -7,7 +7,7 @@
 
 # The functions, variables, and other necessary components of each 
 # analysis script will be imported here.
-
+from gui import GUI
 
 
 # ==================================================================================================
@@ -18,6 +18,8 @@ target = None
 # This will be the center of execution for the script
 def main():
     # TODO: Implement GUI
+    gui = GUI
+    gui.mainloop()
     pass
     
 if __name__ == "__main__":

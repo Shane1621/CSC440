@@ -8,6 +8,7 @@ import sys
 from tkinter import ttk
 from tkinter import messagebox
 import pdb
+from dynamic import Test
 
 # ==================================================================================================
 class GUI(tk.Tk):
@@ -37,6 +38,8 @@ class GUI(tk.Tk):
             self.destroy()
     
     def start_audit(self):
+        self.clear_stdout()
+        self.textbox.insert(tk.END, Test.test() + '\n')
         pass
         
     def start_script_attack(self):
