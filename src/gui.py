@@ -42,7 +42,7 @@ class GUI(tk.Tk):
     def start_script_attack(self):
         pass
 
-    def start_options():
+    def start_options(self):
         pass
 
     def std_out(self, text):
@@ -57,13 +57,6 @@ class GUI(tk.Tk):
 
     def start_user_interface(self):
         
-        # test
-
-        # Initialize style
-        s = ttk.Style()
-        # Create style used by default for all Frames
-        s.configure('button_frame', background='green')
-
         # File location variable
         self.file_location = tk.StringVar()
 
@@ -71,6 +64,8 @@ class GUI(tk.Tk):
         column = 0
         row = 0
 
+        # Am going to have to put these frames into one frame and to switch pages the frames 
+        # just go in and out.
         # Making the labelframes
         self.button_frame = ttk.Labelframe(self, text="Buttons", padding=5)
         self.file_location_frame = ttk.Labelframe(self, text="File Location")
@@ -90,7 +85,7 @@ class GUI(tk.Tk):
             ttk.Button(self.button_frame, command=button[1], text=button[0]).grid(column = 0, row = row, sticky='n', pady = 5)
             row += 1
         
-        # Initializing and packing the file location labelframe stuff
+        # Initializing and packing the file location button in the file location frame
         ttk.Button(self.file_location_frame, text="Enter Filelocation", command=self.set_file_location).grid(column=0, row=0, sticky="nw")
 
         # Initializing and packing the file entry entrybox
@@ -105,7 +100,7 @@ class GUI(tk.Tk):
         self.scrollbar = tk.Scrollbar(self.std_out_frame)
         self.scrollbar.grid(column=1, row=0)
 
-        self.textbox.config(yscrollcommand=self.scrollbar)
+        self.textbox.config(yscrollcommand=self.scrollbar.set)
         self.scrollbar.config(command=self.textbox.yview)
 
         # Packing all of the frames
