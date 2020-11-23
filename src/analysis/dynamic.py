@@ -59,8 +59,7 @@ def valgrind(target):
 
 
 
-'''
+
 # Used only for running this file by itself for debug purposes
 if __name__ == "__main__":
-    valgrind()
-'''
+    valgrind("/usr/bin")
