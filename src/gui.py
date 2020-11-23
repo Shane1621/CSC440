@@ -107,7 +107,7 @@ class GUI(tk.Tk):
             row += 1
         
         # Initializing and packing the file location button in the file location frame
-        ttk.Button(self.file_location_frame, text="Enter Filelocation", command=self.set_file_location).grid(column=0, row=0, sticky="nw")
+        ttk.Button(self.file_location_frame, text="Enter File Location", command=self.set_file_location).grid(column=0, row=0, sticky="nw")
 
         # Initializing and packing the file entry entrybox
         self.file_entry = ttk.Entry(self.file_location_frame, textvariable=self.file_location, width=80)
