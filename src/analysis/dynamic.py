@@ -42,15 +42,11 @@ def valgrind(target):
     process = subprocess.Popen(["valgrind", "--leak-check=full", "--log-file=dynamic-analysis-report.txt", "gnucash"], stdout=subprocess.PIPE)
 
     
-    try: # Need to add append functionality for saving the output results
-        out, err = process.communicate(timeout=60)
-        print("[+]\tAnalysis complete")
-        save('dynamic-analysis-report.txt', test_type='dynamic')
-    except subprocess.TimeoutExpired:
-        process.kill()
-        out, err = process.communicate()
-
-        print("[-]\tAnalysis timed out")
+     
+    out, err = process.communicate()
+    print("[+]\tAnalysis complete")
+    save('dynamic-analysis-report.txt', test_type='dynamic')
+    
 
     #program = str(target)
 
@@ -59,7 +55,8 @@ def valgrind(target):
 
 
 
-
+    '''
 # Used only for running this file by itself for debug purposes
 if __name__ == "__main__":
     valgrind("/usr/bin")
+    '''

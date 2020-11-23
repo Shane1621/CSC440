@@ -11,6 +11,7 @@ import os
 #pylint: disable=import-error
 from analysis.composition import analysis_comp
 from analysis.static import cppCheck
+from analysis.dynamic import valgrind
 
 # ==================================================================================================
 
@@ -21,7 +22,8 @@ def main():
     # Target application source file path
     target = os.path.join(os.environ["HOME"], "Projects", "gnucash")
 
-    analysis_comp(target)
+    #analysis_comp(target)
+    valgrind(target)
     #cppCheck(target)
 
 if __name__ == "__main__":
