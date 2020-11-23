@@ -11,6 +11,7 @@
 import os
 #pylint: disable=import-error
 from analysis.composition import analysis_comp
+from analysis.static import cppCheck
 
 # ==================================================================================================
 
@@ -22,6 +23,7 @@ def main():
     target = os.path.join(os.environ["HOME"], "Projects", "gnucash")
 
     analysis_comp(target)
-    
+    #cppCheck(target)
+
 if __name__ == "__main__":
     main()
