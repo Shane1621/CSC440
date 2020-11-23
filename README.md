@@ -1,4 +1,7 @@
 # CSC440
+# Poor Man Fortify
+
+Developed by:
 The coolest toads
 
 Table of Contents
@@ -13,7 +16,7 @@ Installation
 To run this tool you must install the requred software:
 **DependencyCheck**
 - Dependency check is an owasp tool that is used for ...\
-- **Make sure that you run this tool on something before using it in this program. Running dependency check on its own is vital in ordr to update all of its packages so that it is up to date for the tool to use.**
+- Make sure that you run this tool on something before using it in this program. Running dependency check on its own is vital in order to update all of its packages so that it is up to date for the tool to use.
 - Download link: https://owasp.org/www-project-dependency-check/
 
 **Valgrind**
