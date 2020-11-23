@@ -9,6 +9,7 @@ from tkinter import ttk
 from tkinter import messagebox
 import pdb
 from analysis.dynamic import Test
+from analysis.composition import *
 
 # ==================================================================================================
 class GUI(tk.Tk):
@@ -33,13 +34,14 @@ class GUI(tk.Tk):
     # https://tkdocs.com/tutorial/
 
     # Functions for the buttons
+
     def on_close(self):
         if messagebox.askokcancel(self.title(), "Press ok to exit", parent=self):
             self.destroy()
     
     def start_audit(self):
-        self.clear_stdout()
-        self.textbox.insert(tk.END, Test.test() + '\n')
+        # start the analysis
+        analysis_comp(self, self.file_location)
         pass
         
     def start_script_attack(self):
@@ -49,10 +51,15 @@ class GUI(tk.Tk):
         pass
 
     def std_out(self, text):
-        self.textbox.insert(tk.END, str(text + '\n'))
+        # Delete the previous content in the output
+        # self.textbox.delete('1.0', tk.END)
+
+        #display the content
+        self.textbox.insert(tk.END, str(text))
 
     def set_file_location(self):
         self.file_location = self.file_entry.get()
+        # self.file_location = os.path.join(*self.file_location.split('/'))
         self.std_out(self.file_location)
 
     def clear_stdout(self):

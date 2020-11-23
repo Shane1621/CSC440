@@ -8,7 +8,8 @@ import os
 import subprocess
 #pylint: disable=import-error
 from .save_results import save
-
+from gui import *
+import pdb
 # ==================================================================================================
 
 def setup():
@@ -21,25 +22,27 @@ def setup():
             return True
     return False
 
-def collect_dirs(queue):
+def collect_dirs(gui, queue):
     '''
     Creates directory tree of the entire target application for analysis
     
     queue:  a queue containing the paths to every subdirectory of the target
     '''
+    
+    contents = []
 
     try:
         contents = os.listdir(queue[-1])
     except Exception as e:
-        print(e)
+        gui.std_out(e)
     cwd = queue[-1]
 
     for item in contents:
         if os.path.isdir(os.path.join(cwd, item)):
             queue.append(os.path.join(cwd, item))
-            collect_dirs(queue)
+            collect_dirs(gui, queue)
     
-def analyze(target, queue):
+def analyze(gui, target, queue):
     '''
     Analyzes each directory of the target and generates a report
 
@@ -47,22 +50,23 @@ def analyze(target, queue):
     '''
     queue_size = len(queue)
 
-    # TODO: Put print statements into GUI
+    # TODO: Put std_out statements into GUI
 
     f = open("_log.txt", 'w')
 
     for i, d in enumerate(queue):
         cwd = d
         queue.pop(0)
-        print(f"Analyzing composition of dir {i+1}/{queue_size} ({cwd})...")
+        gui.std_out(f"Analyzing composition of dir {i+1}/{queue_size} ({cwd})...")
         f.write(f"==========\nAnalyzing {i+1}/{queue_size} ({cwd})\n")
+
+        # pdb.set_trace()
 
         process = subprocess.Popen(["dependency-check.sh", "--enableExperimental", "-n",
                                     "-s", cwd], stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-
         try:
             out = str(process.communicate(timeout=60)[0], encoding='UTF-8')
-            print("[+]\tAnalysis complete")
+            gui.std_out("[+]\tAnalysis complete")
             f.write(out)
             save('dependency-check-report.html', 
                  (os.path.basename(target) + cwd.replace(target, '')).replace('/', '_'),
@@ -71,12 +75,12 @@ def analyze(target, queue):
             process.kill()
             out = str(process.communicate()[0], encoding='UTF-8')
             f.write(out)
-            print("[-]\tAnalysis timed out")
+            gui.std_out("[-]\tAnalysis timed out")
 
     f.close()
     save("_log.txt", test_type='composition')
 
-def analysis_comp(target):
+def analysis_comp(gui, target):
     '''
     Primary analysis function
 
@@ -92,9 +96,9 @@ def analysis_comp(target):
 
     queue = [target]
 
-    collect_dirs(queue)
+    collect_dirs(gui, queue)
 
-    analyze(target, queue)
+    analyze(gui, target, queue)
 
 '''
 # Used only for running this file by itself for debug purposes

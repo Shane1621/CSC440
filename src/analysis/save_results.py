@@ -40,6 +40,7 @@ def save(f, f_name=None, test_type="default"):
     
     if not f_name:
         f_name = os.path.basename(f)
+
     shutil.move(os.path.join(old_cwd, f), f_name)
 
     os.chdir(old_cwd)
