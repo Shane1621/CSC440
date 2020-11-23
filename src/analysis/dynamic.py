@@ -5,9 +5,54 @@
 # ==================================================================================================
 
 # Imports go here
-class Test():
-    def test():
-        return "Hello World\n\nthis is a test"
+
+import os
+import subprocess
+#pylint: disable=import-error
+from .save_results import save
+
 # ==================================================================================================
 
 # Functions go here
+
+def setup():
+    '''
+    Ensures tool is available to PATH environment variable
+    '''
+
+    for path in os.environ["PATH"].split(":"):
+        if path.find(os.path.join("valgrind", "bin")) >= 0:
+            return True
+    return False
+
+def valgrind(target):
+    '''
+    Primary analysis function
+
+    target: path to target application's top-level source directory
+    '''
+    if not setup():
+        # TODO: Replace this prompt with a GUI one
+        tool_path = input("Path to valgrind not found. " +
+                        "Please enter the exact file path to valgrind/bin\n> ")
+        tool_path = os.path.abspath(tool_path)
+        os.environ["PATH"] += f":{tool_path}"
+
+    print(f"Beginning dynamic analysis of {target} now...")
+
+    process = subprocess.Popen(["valgrind", "--leak-check=full", "--log-file=dynamic-analysis-report.txt", "gnucash"], stdout=subprocess.PIPE)
+
+    out, err = process.communicate()
+    print("[+]\tAnalysis complete")
+    save('dynamic-analysis-report.txt', test_type='dynamic')
+    
+
+    #program = str(target)
+
+    #os.system("valgrind " + program)
+
+    '''
+# Used only for running this file by itself for debug purposes
+if __name__ == "__main__":
+    valgrind("/usr/bin")
+    '''

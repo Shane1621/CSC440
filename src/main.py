@@ -10,6 +10,7 @@
 import os
 
 #pylint: disable=import-error
+<<<<<<< HEAD
 from gui import GUI
 
 # ==================================================================================================
@@ -17,6 +18,7 @@ from gui import GUI
 # This will be the center of execution for the script
 def main():
     # TODO: Implement GUI
+<<<<<<< HEAD
     gui = GUI
     gui.mainloop(self)
     
