@@ -55,11 +55,6 @@ Installation
 - Follow Python's installation instructions 
 
 
-**gnucash (or another insecure software)**
-- gnucash is the chosen software that
-- Download link: https://github.com/Gnucash/gnucash
-
-
 Operation
 -----
 
