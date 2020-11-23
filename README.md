@@ -22,8 +22,8 @@ Installation
 - Open a terminal window if you have not done so already.
 - Ensure you are in your home directory (e.g. user@system:~$). 
   - If not enter the command `cd` to switch to your home directory.
-- Enter the command `nano .bashrc`.
-- At the bottom of the file enter the line `export PATH=*install*/dependency-check/bin`
+- Using the text editor of your choice, open the file `.bashrc`.
+- At the bottom of the file enter the line `export PATH=$PATH:*install*/dependency-check/bin`
   - Here, *install* is the location you chose to install dependency-check into.
 - Restart for the changes to take effect.
 
@@ -41,7 +41,7 @@ Installation
 - Navigate to the directory where you downloaded the tar.bz2 file from.
 - Enter the command `sudo tar -xf valgrind-*version*.tar.bz2`
   - Here, *version* is the version number of your version of Valgrind
-- Navigate to the newly created directory "valgrind-*version*.tar.bz2"
+- Navigate to the newly created directory `valgrind-*version*.tar.bz2`
 - Enter the command `./configure --prefix=*install*`
   - Here, *install* is the location you wish for valgrind to be installed to
 - Enter the command `make`
