@@ -8,7 +8,7 @@ import sys
 from tkinter import ttk
 from tkinter import messagebox
 import pdb
-from dynamic import Test
+from analysis.dynamic import Test
 
 # ==================================================================================================
 class GUI(tk.Tk):
