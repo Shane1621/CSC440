@@ -5,9 +5,12 @@
 # Imports
 import tkinter as tk
 import sys
+import os
 from tkinter import ttk
 from tkinter import messagebox
 import pdb
+
+#pylint: disable=import-error
 from analysis.dynamic import Test
 from analysis.composition import *
 
@@ -55,15 +58,23 @@ class GUI(tk.Tk):
         # self.textbox.delete('1.0', tk.END)
 
         #display the content
-        self.textbox.insert(tk.END, str(text + '\n'))
+        self.textbox.config(state=tk.NORMAL)
+        self.textbox.insert(tk.END, str(text) + '\n')
+        self.textbox.config(state=tk.DISABLED)
 
     def set_file_location(self):
-        self.file_location = self.file_entry.get()
+        temp = self.file_entry.get()
+        if os.path.isdir(temp):
+            self.file_location = temp
+        else:
+            self.std_out(f"The specifiec path does not exist or is invalid\nGiven: {temp}")
         # self.file_location = os.path.join(*self.file_location.split('/'))
         # self.std_out(self.file_location)
 
     def clear_stdout(self):
+        self.textbox.config(state=tk.NORMAL)
         self.textbox.delete('1.0', tk.END)
+        self.textbox.config(state=tk.DISABLED)
 
     def start_user_interface(self):
         
