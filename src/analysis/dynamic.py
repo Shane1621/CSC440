@@ -39,13 +39,13 @@ def valgrind(target):
 
     print(f"Beginning dynamic analysis of {target} now...")
 
-    process = subprocess.Popen(["valgrind", "gnucash"], stdout=subprocess.PIPE)
+    process = subprocess.Popen(["valgrind", "--leak-check=full", "--log-file=dynamic-analysis-report.txt", "gnucash"], stdout=subprocess.PIPE)
 
     
     try: # Need to add append functionality for saving the output results
         out, err = process.communicate(timeout=60)
         print("[+]\tAnalysis complete")
-        save('dependency-check-report.html', test_type='dynamic')
+        save('dynamic-analysis-report.txt', test_type='dynamic')
     except subprocess.TimeoutExpired:
         process.kill()
         out, err = process.communicate()
