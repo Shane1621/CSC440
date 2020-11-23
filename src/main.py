@@ -18,7 +18,7 @@ from gui import GUI
 def main():
     # TODO: Implement GUI
     gui = GUI
-    gui.mainloop()
+    gui.mainloop(self)
     pass
     
 if __name__ == "__main__":

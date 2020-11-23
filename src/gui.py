@@ -55,12 +55,12 @@ class GUI(tk.Tk):
         # self.textbox.delete('1.0', tk.END)
 
         #display the content
-        self.textbox.insert(tk.END, str(text))
+        self.textbox.insert(tk.END, str(text + '\n'))
 
     def set_file_location(self):
         self.file_location = self.file_entry.get()
         # self.file_location = os.path.join(*self.file_location.split('/'))
-        self.std_out(self.file_location)
+        # self.std_out(self.file_location)
 
     def clear_stdout(self):
         self.textbox.delete('1.0', tk.END)
@@ -103,7 +103,7 @@ class GUI(tk.Tk):
         self.file_entry.grid(column=0, row=1, sticky="we", pady=0)
 
         # Initializing and packing the stdout labelframe and textbox
-        self.textbox = tk.Text(self.std_out_frame)
+        self.textbox = tk.Text(self.std_out_frame, state=tk.DISABLED)
         self.textbox.grid(row=0, column=0)
 
         # Initializing and packing the scrollbar for teh textbox
