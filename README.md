@@ -1,5 +1,4 @@
-# CSC440
-# Poor Man Fortify
+# CSC440 Poor Man Fortify
 
 Developed by:
 The coolest toads
