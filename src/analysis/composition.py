@@ -49,26 +49,32 @@ def analyze(target, queue):
 
     # TODO: Put print statements into GUI
 
+    f = open("_log.txt", 'w')
+
     for i, d in enumerate(queue):
         cwd = d
         queue.pop(0)
         print(f"Analyzing composition of dir {i+1}/{queue_size} ({cwd})...")
+        f.write(f"==========\nAnalyzing {i+1}/{queue_size} ({cwd})\n")
 
-        process = subprocess.Popen(["dependency-check.sh", "--enableExperimental",
-                                    "-s", cwd], stdout=subprocess.PIPE)
+        process = subprocess.Popen(["dependency-check.sh", "--enableExperimental", "-n",
+                                    "-s", cwd], stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
 
         try:
-            out, err = process.communicate(timeout=60)
+            out = str(process.communicate(timeout=60)[0], encoding='UTF-8')
             print("[+]\tAnalysis complete")
+            f.write(out)
             save('dependency-check-report.html', 
                  (os.path.basename(target) + cwd.replace(target, '')).replace('/', '_'),
                  'composition')
         except subprocess.TimeoutExpired:
             process.kill()
-            out, err = process.communicate()
-
+            out = str(process.communicate()[0], encoding='UTF-8')
+            f.write(out)
             print("[-]\tAnalysis timed out")
 
+    f.close()
+    save("_log.txt", test_type='composition')
 
 def analysis_comp(target):
     '''
@@ -88,8 +94,7 @@ def analysis_comp(target):
 
     collect_dirs(queue)
 
-    while queue:
-        analyze(target, queue)
+    analyze(target, queue)
 
 '''
 # Used only for running this file by itself for debug purposes
