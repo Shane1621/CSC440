@@ -13,6 +13,7 @@ import pdb
 #pylint: disable=import-error
 from analysis.dynamic import *
 from analysis.composition import *
+from analysis.static import *
 
 # import for the dynamic functionality
 
@@ -49,17 +50,23 @@ class GUI(tk.Tk):
             self.std_out("[-] File Location not set. Please provide a valid file path.\n")
             return
 
+        # Analysis Header
+        self.std_out("\n\n\n=========================Dependency Check=========================\n\n\n")
+
+        # Start the analysis
+        analysis_comp(self, self.file_location)
+
         # valgrind header
         self.std_out("\n\n\n=========================Valgrind=========================\n\n\n")
 
         # Start the valgrind analysis
         valgrind(self, self.file_location)
 
-        # Analysis Header
-        self.std_out("\n\n\n=========================Dependency Check=========================\n\n\n")
+        # valgrind header
+        self.std_out("\n\n\n=========================Cppcheck=========================\n\n\n")
 
-        # Start the analysis
-        analysis_comp(self, self.file_location)
+        # Start the valgrind analysis
+        cppCheck(self, self.file_location)
         
     def start_script_attack(self):
         pass

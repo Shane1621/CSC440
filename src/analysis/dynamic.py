@@ -37,7 +37,7 @@ def valgrind(gui, target):
 
     process = subprocess.Popen(["valgrind", "--leak-check=full", "--log-file=dynamic-analysis-report.txt", "gnucash"], stdout=subprocess.PIPE)
 
-    out, err = process.communicate()
+    process.communicate()
     gui.std_out("[+]\tAnalysis complete")
     save('dynamic-analysis-report.txt', test_type='dynamic')
     
