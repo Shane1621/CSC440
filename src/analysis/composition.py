@@ -17,11 +17,11 @@ def setup():
     '''
     Ensures tool is available to PATH environment variable
     '''
-
-    for path in os.environ["PATH"].split(":"):
-        if path.find(os.path.join("dependency-check", "bin")) >= 0:
-            return True
+    out = subprocess.Popen(["which", "dependency-check.sh"]).communicate()[0]
+    if out:
+        return True
     return False
+    
 
 def collect_dirs(gui, queue):
     '''
@@ -92,21 +92,15 @@ def analysis_comp(gui, target):
     '''
     
     if not setup():
-        # TODO: Replace this prompt with a GUI one
-        gui.std_out("Path to dependency-check not found. " + 
-                    "Please enter the exact file path to dependency-check/bin")
-        tool_path = os.path.abspath(tool_path)
-        os.environ["PATH"] += f":{tool_path}"
-
-    #checking to see if the target is actually a directory
-    if target != None and os.path.isdir(target):
-        queue = [target]
-    else:
+        gui.std_out("Dependency-check was not found. Skipping...\n")
         return
+
+    queue = [target]
 
     collect_dirs(gui, queue)
 
     analyze(gui, target, queue)
+
 
 '''
 # Used only for running this file by itself for debug purposes

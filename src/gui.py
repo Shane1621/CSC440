@@ -46,12 +46,13 @@ class GUI(tk.Tk):
     
     def start_dynamic(self):
         valgrind(self, self.file_location)
-        pass
 
     def start_audit(self):
-        # start the analysis
+        if not self.file_location:
+            self.std_out("[-] File Location not set. Please provide a valid file path.\n")
+            return
+        # Start the analysis
         analysis_comp(self, self.file_location)
-        pass
         
     def start_script_attack(self):
         pass
@@ -71,9 +72,10 @@ class GUI(tk.Tk):
     def set_file_location(self):
         temp = self.file_entry.get()
         if os.path.isdir(temp):
+            self.std_out(f"[+] File Location successfully set: '{temp}'")
             self.file_location = temp
         else:
-            self.std_out(f"The specifiec path does not exist or is invalid\nGiven: {temp}")
+            self.std_out(f"[-] The specifiec path does not exist or is invalid\n")
 
     def clear_stdout(self):
         self.textbox.config(state=tk.NORMAL)
@@ -83,7 +85,7 @@ class GUI(tk.Tk):
     def start_user_interface(self):
         
         # File location variable and initialize it to nothing
-        self.file_location = tk.StringVar().set(" ")
+        self.file_location = tk.StringVar().set("")
 
         # Column and Row Variables to use
         column = 0
