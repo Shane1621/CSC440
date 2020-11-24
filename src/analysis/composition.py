@@ -21,7 +21,6 @@ def setup():
     if out:
         return True
     return False
-    
 
 def collect_dirs(gui, queue):
     '''
@@ -29,10 +28,6 @@ def collect_dirs(gui, queue):
     
     queue:  a queue containing the paths to every subdirectory of the target
     '''
-
-    # start debugging
-    pdb.set_trace()
-
     try:
         contents = os.listdir(queue[-1])
     except Exception as e:
@@ -62,9 +57,6 @@ def analyze(gui, target, queue):
         queue.pop(0)
         gui.std_out(f"Analyzing composition of dir {i+1}/{queue_size} ({cwd})...")
         f.write(f"==========\nAnalyzing {i+1}/{queue_size} ({cwd})\n")
-
-        # start debugging
-        pdb.set_trace()
 
         process = subprocess.Popen(["dependency-check.sh", "--enableExperimental", "-n",
                                     "-s", cwd], stderr=subprocess.STDOUT, stdout=subprocess.PIPE)

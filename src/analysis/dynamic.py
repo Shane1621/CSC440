@@ -18,10 +18,9 @@ def setup():
     '''
     Ensures tool is available to PATH environment variable
     '''
-
-    for path in os.environ["PATH"].split(":"):
-        if path.find(os.path.join("valgrind", "bin")) >= 0:
-            return True
+    out = subprocess.Popen(["which", "dependency-check.sh"], stdout=subprocess.PIPE).communicate()
+    if out:
+        return True
     return False
 
 def valgrind(gui, target):

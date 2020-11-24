@@ -43,14 +43,21 @@ class GUI(tk.Tk):
     def on_close(self):
         if messagebox.askokcancel(self.title(), "Press ok to exit", parent=self):
             self.destroy()
-    
-    def start_dynamic(self):
-        valgrind(self, self.file_location)
 
     def start_audit(self):
         if not self.file_location:
             self.std_out("[-] File Location not set. Please provide a valid file path.\n")
             return
+
+        # valgrind header
+        self.std_out("\n\n\n=========================Valgrind=========================\n\n\n")
+
+        # Start the valgrind analysis
+        valgrind(self, self.file_location)
+
+        # Analysis Header
+        self.std_out("\n\n\n=========================Dependency Check=========================\n\n\n")
+
         # Start the analysis
         analysis_comp(self, self.file_location)
         
@@ -101,7 +108,6 @@ class GUI(tk.Tk):
         # Initializing the buttons for the buttons labelframe
         buttons = [
                 ["Audit", self.start_audit],
-                ["Dynamic", self.start_dynamic],
                 ["Script", self.start_script_attack],
                 ["Options", self.start_options],
                 ["Clear", self.clear_stdout],
