@@ -18,7 +18,7 @@ def setup():
     '''
     Ensures tool is available to PATH environment variable
     '''
-    out = subprocess.Popen(["which", "dependency-check.sh"], stdout=subprocess.PIPE).communicate()
+    out = subprocess.Popen(["which", "valgrind"], stdout=subprocess.PIPE).communicate()
     if out:
         return True
     return False
