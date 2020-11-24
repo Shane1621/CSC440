@@ -10,7 +10,6 @@ import os
 import subprocess
 #pylint: disable=import-error
 from .save_results import save
-
 # ==================================================================================================
 
 # Functions go here
@@ -25,7 +24,7 @@ def setup():
             return True
     return False
 
-def valgrind(target):
+def valgrind(gui, target):
     '''
     Primary analysis function
 
@@ -33,17 +32,17 @@ def valgrind(target):
     '''
     if not setup():
         # TODO: Replace this prompt with a GUI one
-        tool_path = input("Path to valgrind not found. " +
-                        "Please enter the exact file path to valgrind/bin\n> ")
+        gui.std_out("Path to valgrind not found. " +
+                    "Please enter the exact file path to valgrind/bin")
         tool_path = os.path.abspath(tool_path)
         os.environ["PATH"] += f":{tool_path}"
 
-    print(f"Beginning dynamic analysis of {target} now...")
+    gui.std_out(f"Beginning dynamic analysis of {target} now...")
 
     process = subprocess.Popen(["valgrind", "--leak-check=full", "--log-file=dynamic-analysis-report.txt", "gnucash"], stdout=subprocess.PIPE)
 
     out, err = process.communicate()
-    print("[+]\tAnalysis complete")
+    gui.std_out("[+]\tAnalysis complete")
     save('dynamic-analysis-report.txt', test_type='dynamic')
     
 

@@ -4,6 +4,7 @@
 
 # ==================================================================================================
 
+import pdb
 import os
 import subprocess
 #pylint: disable=import-error
@@ -28,13 +29,15 @@ def collect_dirs(gui, queue):
     
     queue:  a queue containing the paths to every subdirectory of the target
     '''
-    
-    contents = []
+
+    # start debugging
+    pdb.set_trace()
 
     try:
         contents = os.listdir(queue[-1])
     except Exception as e:
-        gui.std_out(e)
+        gui.std_out(str(e))
+
     cwd = queue[-1]
 
     for item in contents:
@@ -60,7 +63,8 @@ def analyze(gui, target, queue):
         gui.std_out(f"Analyzing composition of dir {i+1}/{queue_size} ({cwd})...")
         f.write(f"==========\nAnalyzing {i+1}/{queue_size} ({cwd})\n")
 
-        # pdb.set_trace()
+        # start debugging
+        pdb.set_trace()
 
         process = subprocess.Popen(["dependency-check.sh", "--enableExperimental", "-n",
                                     "-s", cwd], stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
@@ -89,12 +93,16 @@ def analysis_comp(gui, target):
     
     if not setup():
         # TODO: Replace this prompt with a GUI one
-        tool_path = input("Path to dependency-check not found. " +
-                          "Please enter the exact file path to dependency-check/bin\n> ")
+        gui.std_out("Path to dependency-check not found. " + 
+                    "Please enter the exact file path to dependency-check/bin")
         tool_path = os.path.abspath(tool_path)
         os.environ["PATH"] += f":{tool_path}"
 
-    queue = [target]
+    #checking to see if the target is actually a directory
+    if target != None and os.path.isdir(target):
+        queue = [target]
+    else:
+        return
 
     collect_dirs(gui, queue)
 

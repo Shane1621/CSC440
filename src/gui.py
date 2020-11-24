@@ -11,8 +11,10 @@ from tkinter import messagebox
 import pdb
 
 #pylint: disable=import-error
-from analysis.dynamic import Test
+from analysis.dynamic import *
 from analysis.composition import *
+
+# import for the dynamic functionality
 
 # ==================================================================================================
 class GUI(tk.Tk):
@@ -42,6 +44,10 @@ class GUI(tk.Tk):
         if messagebox.askokcancel(self.title(), "Press ok to exit", parent=self):
             self.destroy()
     
+    def start_dynamic(self):
+        valgrind(self, self.file_location)
+        pass
+
     def start_audit(self):
         # start the analysis
         analysis_comp(self, self.file_location)
@@ -68,8 +74,6 @@ class GUI(tk.Tk):
             self.file_location = temp
         else:
             self.std_out(f"The specifiec path does not exist or is invalid\nGiven: {temp}")
-        # self.file_location = os.path.join(*self.file_location.split('/'))
-        # self.std_out(self.file_location)
 
     def clear_stdout(self):
         self.textbox.config(state=tk.NORMAL)
@@ -78,8 +82,8 @@ class GUI(tk.Tk):
 
     def start_user_interface(self):
         
-        # File location variable
-        self.file_location = tk.StringVar()
+        # File location variable and initialize it to nothing
+        self.file_location = tk.StringVar().set(" ")
 
         # Column and Row Variables to use
         column = 0
@@ -95,10 +99,11 @@ class GUI(tk.Tk):
         # Initializing the buttons for the buttons labelframe
         buttons = [
                 ["Audit", self.start_audit],
+                ["Dynamic", self.start_dynamic],
                 ["Script", self.start_script_attack],
                 ["Options", self.start_options],
                 ["Clear", self.clear_stdout],
-                ["Close", self.on_close]
+                ["Close", self.on_close],
                 ]
 
         # Packing the button frame
