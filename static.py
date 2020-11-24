@@ -8,8 +8,7 @@
 import os
 import subprocess
 #pylint: disable=import-error
-#
-
+from .save_results import save
 
 # ==================================================================================================
 
@@ -22,16 +21,12 @@ import subprocess
 def cppCheck(target):
     '''
     Primary analysis function
-
     target: path to target application's top-level source directory
     '''
     gnuSpot = str(target)
 
-    
-    print(gnuSpot)
-
     os.system("cppcheck --enable=all >> reporting.txt cd " + gnuSpot)
-    
+    save("reporting.txt", test_type='static')
 
 '''
 # Used only for running this file by itself for debug purposes
