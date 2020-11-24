@@ -30,11 +30,8 @@ def valgrind(gui, target):
     target: path to target application's top-level source directory
     '''
     if not setup():
-        # TODO: Replace this prompt with a GUI one
-        gui.std_out("Path to valgrind not found. " +
-                    "Please enter the exact file path to valgrind/bin")
-        tool_path = os.path.abspath(tool_path)
-        os.environ["PATH"] += f":{tool_path}"
+        gui.std_out("Valgrind was not found. Skipping...\n")
+        return
 
     gui.std_out(f"Beginning dynamic analysis of {target} now...")
 
